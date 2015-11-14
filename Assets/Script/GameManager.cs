@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour {
 
 	public int secondsLeft = 90;
 
+	public int currentPopUp;
 
 	private System.Timers.Timer gameTimer;
 
@@ -34,21 +35,23 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void MakeCustomerOrder1() {
-		this.mainCamera.transform.Translate (new Vector3 (1400f, 0f, 0f));
+		displayPopUp ();
+		currentPopUp = 1;
 	}
 
 	public void MakeCustomerOrder2() {
-		// TODO
-		this.mainCamera.transform.Translate (new Vector3 (0.5f, 0f, 0f));
+		displayPopUp ();
+		currentPopUp = 2;
 	}
 
 	public void MakeCustomerOrder3() {
-		// TODO
-		this.mainCamera.transform.Translate (new Vector3 (-1.0f, 0f, 0f));
+		displayPopUp ();
+		currentPopUp = 3;
 	}
 
 	// To be called from the pop-up
 	public void ServeCustomerResult1(int result) {
+		print ("Yes, it's calling Customer1 ");
 		if (result == customerOrder1) {
 			happyCustomersCount++;
 		} else {
@@ -59,6 +62,7 @@ public class GameManager : MonoBehaviour {
 
 	// To be called from the pop-up
 	public void ServeCustomerResult2(int result) {
+		print ("Yes, it's calling Customer2 ");
 		if (result == customerOrder2) {
 			happyCustomersCount++;
 		} else {
@@ -69,6 +73,7 @@ public class GameManager : MonoBehaviour {
 
 	// To be called from the pop-up
 	public void ServeCustomerResult3(int result) {
+		print ("Yes, it's calling Customer3 ");
 		if (result == customerOrder3) {
 			happyCustomersCount++;
 		} else {
@@ -80,7 +85,16 @@ public class GameManager : MonoBehaviour {
 
 	public void clearCamera(){
 		//Focus back on MainScene
-		mainCamera.transform.Translate (-1319f,0,0);
+		//mainCamera.transform.Translate (-1319f,0,0);
+		Vector3 newPosition = mainCamera.transform.position;
+		newPosition.x = -1334f;
+		mainCamera.transform.position = newPosition;
+	}
+
+	public void displayPopUp(){
+		Vector3 newPosition = mainCamera.transform.position;
+		newPosition.x += 1400f;
+		mainCamera.transform.position = newPosition;
 	}
 
 
