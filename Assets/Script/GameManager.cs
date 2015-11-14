@@ -21,6 +21,10 @@ public class GameManager : MonoBehaviour {
 
 	private System.Timers.Timer gameTimer;
 
+	public void Start(){
+		StartGame ();
+	}
+
 	public void StartGame() {
 		// Create a timer and make it tick every second
 		gameTimer = new System.Timers.Timer (1000);
@@ -51,7 +55,6 @@ public class GameManager : MonoBehaviour {
 
 	// To be called from the pop-up
 	public void ServeCustomerResult1(int result) {
-		print ("Yes, it's calling Customer1 ");
 		if (result == customerOrder1) {
 			happyCustomersCount++;
 		} else {
@@ -62,7 +65,6 @@ public class GameManager : MonoBehaviour {
 
 	// To be called from the pop-up
 	public void ServeCustomerResult2(int result) {
-		print ("Yes, it's calling Customer2 ");
 		if (result == customerOrder2) {
 			happyCustomersCount++;
 		} else {
@@ -73,7 +75,6 @@ public class GameManager : MonoBehaviour {
 
 	// To be called from the pop-up
 	public void ServeCustomerResult3(int result) {
-		print ("Yes, it's calling Customer3 ");
 		if (result == customerOrder3) {
 			happyCustomersCount++;
 		} else {
