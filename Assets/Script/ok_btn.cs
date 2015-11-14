@@ -3,6 +3,9 @@ using System.Collections;
 
 public class ok_btn : MonoBehaviour {
 
+	public GameManager gameManager;
+
+
 	public static int currentOrder;
 	public static bool isRebus;
 	public static bool isGoreng;
@@ -14,8 +17,14 @@ public class ok_btn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		print (currentOrder);
-		print ("Is rebus: " + isRebus);
-		print ("Is Goreng: " + isGoreng);
+		//print (currentOrder);
+		//print ("Is rebus: " + isRebus);
+		//print ("Is Goreng: " + isGoreng);
 	}
+
+	void OnMouseUp(){
+		gameManager.ServeCustomerResult1 (currentOrder);
+	}
+
+
 }
