@@ -9,11 +9,11 @@ public class GameManager : MonoBehaviour {
 	public int sadCustomersCount = 0;
 
 	public int customerOrder1 = 0;
-	public int customerResult1 = 0;
+	public int customerResult1 = 999;
 	public int customerOrder2 = 0;
-	public int customerResult2 = 0;
+	public int customerResult2 = 999;
 	public int customerOrder3 = 0;
-	public int customerResult3 = 0;
+	public int customerResult3 = 999;
 
 	public int secondsLeft = 90;
 	public int currentPopUp;
@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour {
 		}
 		clearCamera ();
 
+		customerResult1 = result;
 		// TODO: play animation.
 	}
 
@@ -107,6 +108,8 @@ public class GameManager : MonoBehaviour {
 			sadCustomersCount++;
 		}
 		clearCamera ();
+
+		customerResult2 = result;
 	}
 
 	// To be called from the pop-up
@@ -117,6 +120,8 @@ public class GameManager : MonoBehaviour {
 			sadCustomersCount++;
 		}
 		clearCamera ();
+
+		customerResult3 = result;
 	}
 
 
