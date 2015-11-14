@@ -13,7 +13,11 @@ public class dish1_handler : MonoBehaviour {
 	void Start () {
 	
 	}
-	
+
+	void OnMouseDown(){
+		gameManager.displayPopUp ();
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (isGoreng ()) {
