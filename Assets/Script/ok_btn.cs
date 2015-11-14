@@ -5,6 +5,7 @@ public class ok_btn : MonoBehaviour {
 
 	public GameManager gameManager;
 
+	//Global varibles for the recipe
 	public static int currentOrder;
 	public static bool isRebus;
 	public static bool isGoreng;

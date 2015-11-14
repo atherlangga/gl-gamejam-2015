@@ -17,12 +17,18 @@ public class ingredient1_handler : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-
+		//Add a onTOuch effect
+		if (ok_btn.isGoreng == false & pressed == false) {
+			this.transform.localScale = new Vector3 (240, 240, 1); 
+		}
 	}
 
 	void OnMouseUp(){
+		//Come back to normal the scale
+		this.transform.localScale = new Vector3 (210, 205, 1); 
+
 		//If Goreng wasnt choosed you can still choose Rebus :) 
-			if (ok_btn.isGoreng == false & pressed == false) {
+		if (ok_btn.isGoreng == false & pressed == false) {
 				performOrder();
 		}
 	}

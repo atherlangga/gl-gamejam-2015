@@ -15,7 +15,18 @@ public class ingredient4_handler : MonoBehaviour {
 	
 	}
 
+	void OnMouseDown(){
+		//Add a onTOuch effect
+		if (pressed == false) {
+			this.transform.localScale = new Vector3 (240, 240, 1); 
+		}
+	}
+
+
 	void OnMouseUp(){
+		//Come back to normal the scale
+		this.transform.localScale = new Vector3 (210, 205, 1);
+
 		if (pressed == false) {
 			performOrder ();
 		}

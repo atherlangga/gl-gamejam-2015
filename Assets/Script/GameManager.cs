@@ -34,18 +34,18 @@ public class GameManager : MonoBehaviour {
 
 	void Update() {
 		// Determine whether the first seat is empty.
-		if (!customerAnimation1.isPlaying) {
+		if (customerAnimation1 != null && !customerAnimation1.isPlaying) {
 			// If it is, we put the seat empty flag to true
 			isSeatEmpty1 = true;
 		}
 
 		// Do the same ting for the second seat..
-		if (!customerAnimation2.isPlaying) {
+		if (customerAnimation2 != null &&!customerAnimation2.isPlaying) {
 			isSeatEmpty2 = true;
 		}
 
 		// And the third seat.
-		if (!customerAnimation3.isPlaying) {
+		if (customerAnimation3 != null && !customerAnimation3.isPlaying) {
 			isSeatEmpty3 = true;
 		}
 	}
@@ -121,13 +121,11 @@ public class GameManager : MonoBehaviour {
 		//Focus back on MainScene
 		//mainCamera.transform.Translate (-1319f,0,0);
 		Vector3 newPosition = mainCamera.transform.position;
-		newPosition.x = -1334f;
 		mainCamera.transform.position = newPosition;
 	}
 
 	public void displayPopUp(){
 		Vector3 newPosition = mainCamera.transform.position;
-		newPosition.x += 1400f;
 		mainCamera.transform.position = newPosition;
 	}
 
