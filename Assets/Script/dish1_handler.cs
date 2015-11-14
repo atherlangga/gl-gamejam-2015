@@ -20,4 +20,20 @@ public class dish1_handler : MonoBehaviour {
 	}
 
 
+	boolean isGoreng() {
+		char[] chars = gameManager.customerResult1.ToString ().ToCharArray ();
+		return chars [0] == '1';
+	}
+	
+	boolean isWithTelur() {
+		char[] chars = gameManager.customerResult1.ToString ().ToCharArray ();
+		return chars [1] == '3';
+	}
+	
+	boolean isWithChilli() {
+		char[] chars = gameManager.customerResult1.ToString ().ToCharArray ();
+		return chars [2] == '4';
+	}
+	
+	
 }
