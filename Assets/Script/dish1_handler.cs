@@ -47,11 +47,6 @@ public class dish1_handler : MonoBehaviour {
 		}
 	}
 
-	void OnMouseUp(){
-		gameManager.MakeCustomerOrder1 ();
-	}
-
-
 	//Clear the food after 3 seconds has passed
 	IEnumerator clearFood()
 	{
@@ -61,21 +56,33 @@ public class dish1_handler : MonoBehaviour {
 
 	
 	bool isGoreng() {
+		if (gameManager.customerResult1 == 0) {
+			return false;
+		}
 		char[] chars = gameManager.customerResult1.ToString ().ToCharArray ();
 		return chars [0] == '1';
 	}
 
 	bool isRebus() {
+		if (gameManager.customerResult1 == 0) {
+			return false;
+		}
 		char[] chars = gameManager.customerResult1.ToString ().ToCharArray ();
 		return chars [0] == '2';
 	}
 	
 	bool isWithTelur() {
+		if (gameManager.customerResult1 == 0) {
+			return false;
+		}
 		char[] chars = gameManager.customerResult1.ToString ().ToCharArray ();
 		return chars [1] == '3';
 	}
 	
 	bool isWithChilli() {
+		if (gameManager.customerResult1 == 0) {
+			return false;
+		}
 		char[] chars = gameManager.customerResult1.ToString ().ToCharArray ();
 		return chars [2] == '4';
 	}
