@@ -28,9 +28,9 @@ public class GameManager : MonoBehaviour {
 
 	private System.Timers.Timer gameTimer;
 
-	private bool isSeatEmpty1 = true;
-	private bool isSeatEmpty2 = true;
-	private bool isSeatEmpty3 = true;
+	public bool isSeatEmpty1 = true;
+	public bool isSeatEmpty2 = true;
+	public bool isSeatEmpty3 = true;
 
 	void Update() {
 		// Determine whether the first seat is empty.
