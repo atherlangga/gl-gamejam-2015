@@ -3,6 +3,8 @@ using System.Collections;
 
 public class cancel_btn : MonoBehaviour {
 
+	public GameManager gameManager;
+
 	public GameObject ingredient1;
 	public GameObject ingredient2;
 	public GameObject ingredient3;
@@ -39,7 +41,7 @@ public class cancel_btn : MonoBehaviour {
 		ingredient3_handler.pressed = false;
 		ingredient4_handler.pressed = false;
 
-		//TODO move camera
+		gameManager.clearCamera ();
 
 
 	}

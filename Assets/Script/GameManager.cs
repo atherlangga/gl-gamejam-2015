@@ -34,8 +34,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void MakeCustomerOrder1() {
-		// TODO
-		this.mainCamera.transform.Translate (new Vector3 (0.5f, 0f, 0f));
+		this.mainCamera.transform.Translate (new Vector3 (1400f, 0f, 0f));
 	}
 
 	public void MakeCustomerOrder2() {
@@ -55,6 +54,7 @@ public class GameManager : MonoBehaviour {
 		} else {
 			sadCustomersCount++;
 		}
+		clearCamera ();
 	}
 
 	// To be called from the pop-up
@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour {
 		} else {
 			sadCustomersCount++;
 		}
+		clearCamera ();
 	}
 
 	// To be called from the pop-up
@@ -73,7 +74,15 @@ public class GameManager : MonoBehaviour {
 		} else {
 			sadCustomersCount++;
 		}
+		clearCamera ();
 	}
+
+
+	public void clearCamera(){
+		//Focus back on MainScene
+		mainCamera.transform.Translate (-1319f,0,0);
+	}
+
 
 	// Parts needed for Singleton Pattern
 	// ----------------------------------
@@ -118,7 +127,7 @@ public class GameManager : MonoBehaviour {
 			return result;
 		}
 	}
-
+	
 	private int determineStars(int happyCustomersCount, int sadCustomersCount) {
 		// TODO
 		return 0;

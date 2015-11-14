@@ -5,7 +5,6 @@ public class ok_btn : MonoBehaviour {
 
 	public GameManager gameManager;
 
-
 	public static int currentOrder;
 	public static bool isRebus;
 	public static bool isGoreng;
@@ -25,6 +24,5 @@ public class ok_btn : MonoBehaviour {
 	void OnMouseUp(){
 		gameManager.ServeCustomerResult1 (currentOrder);
 	}
-
-
+	
 }
