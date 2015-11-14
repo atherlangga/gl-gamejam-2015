@@ -71,16 +71,19 @@ public class GameManager : MonoBehaviour {
 
 	public void MakeCustomerOrder1() {
 		displayPopUp ();
+		//Specify the customer you are serving
 		currentPopUp = 1;
 	}
 
 	public void MakeCustomerOrder2() {
 		displayPopUp ();
+		//Specify the customer you are serving
 		currentPopUp = 2;
 	}
 
 	public void MakeCustomerOrder3() {
 		displayPopUp ();
+		//Specify the customer you are serving
 		currentPopUp = 3;
 	}
 
@@ -121,11 +124,13 @@ public class GameManager : MonoBehaviour {
 		//Focus back on MainScene
 		//mainCamera.transform.Translate (-1319f,0,0);
 		Vector3 newPosition = mainCamera.transform.position;
+		newPosition.x = -1320f;
 		mainCamera.transform.position = newPosition;
 	}
 
 	public void displayPopUp(){
 		Vector3 newPosition = mainCamera.transform.position;
+		newPosition.x += 1320f;
 		mainCamera.transform.position = newPosition;
 	}
 
