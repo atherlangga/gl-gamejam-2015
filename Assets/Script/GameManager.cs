@@ -16,10 +16,39 @@ public class GameManager : MonoBehaviour {
 	public int customerResult3 = 0;
 
 	public int secondsLeft = 90;
-
 	public int currentPopUp;
 
+	public Animator customerAnimator1;
+	public Animator customerAnimator2;
+	public Animator customerAnimator3;
+
+	public Animation customerAnimation1;
+	public Animation customerAnimation2;
+	public Animation customerAnimation3;
+
 	private System.Timers.Timer gameTimer;
+
+	private bool isSeatEmpty1 = true;
+	private bool isSeatEmpty2 = true;
+	private bool isSeatEmpty3 = true;
+
+	void Update() {
+		// Determine whether the first seat is empty.
+		if (!customerAnimation1.isPlaying) {
+			// If it is, we put the seat empty flag to true
+			isSeatEmpty1 = true;
+		}
+
+		// Do the same ting for the second seat..
+		if (!customerAnimation2.isPlaying) {
+			isSeatEmpty2 = true;
+		}
+
+		// And the third seat.
+		if (!customerAnimation3.isPlaying) {
+			isSeatEmpty3 = true;
+		}
+	}
 
 	public void Start(){
 		StartGame ();
@@ -29,10 +58,12 @@ public class GameManager : MonoBehaviour {
 		// Create a timer and make it tick every second
 		gameTimer = new System.Timers.Timer (1000);
 
-		// Reduce `secondsLeft` every second
 		gameTimer.Elapsed += (object sender, System.Timers.ElapsedEventArgs e) => {
-			print ("Tick");
+			// Reduce `secondsLeft` every second
 			secondsLeft--;
+
+			// Generate new Customer if necessary
+			generateNewCustomerIfNecessary();
 		};
 
 		gameTimer.Start ();
@@ -61,6 +92,8 @@ public class GameManager : MonoBehaviour {
 			sadCustomersCount++;
 		}
 		clearCamera ();
+
+		// TODO: play animation.
 	}
 
 	// To be called from the pop-up
@@ -114,10 +147,28 @@ public class GameManager : MonoBehaviour {
 	}
 	// ----------------------------------
 
+	private void generateNewCustomerIfNecessary() {
+		if (currentCustomerCount == 0) {
+			customerOrder1 = determineRequestedIndomie (currentCustomerCount);
+		} else if (currentCustomerCount == 1) {
+			customerOrder2 = determineRequestedIndomie (currentCustomerCount);
+		} else {
+			if (isSeatEmpty1) {
+				customerOrder1 = determineRequestedIndomie(currentCustomerCount);
+			} else if (isSeatEmpty2) {
+				customerOrder2 = determineRequestedIndomie(currentCustomerCount);
+			} else if (isSeatEmpty3) {
+				customerOrder3 = determineRequestedIndomie(currentCustomerCount);
+			}
+		}
+
+		currentCustomerCount++;
+	}
+
 	private int determineRequestedIndomie(int orderNumber) {
-		if (orderNumber == 1) {
+		if (orderNumber == 0) {
 			return 100;
-		} else if (orderNumber == 2) {
+		} else if (orderNumber == 1) {
 			return 200;
 		} else {
 			// Really randomizes this time
