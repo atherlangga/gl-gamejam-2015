@@ -9,9 +9,4 @@ public class Balloon1 : MonoBehaviour {
 		// TODO: Draw texture:
 		// gameManager.customerOrder1
 	}
-
-	void OnMouseDown() {
-		// TODO: Remove this
-		gameManager.StartGame ();
-	}
 }

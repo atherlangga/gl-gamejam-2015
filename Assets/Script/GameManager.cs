@@ -37,16 +37,19 @@ public class GameManager : MonoBehaviour {
 		if (customerAnimation1 != null && !customerAnimation1.isPlaying) {
 			// If it is, we put the seat empty flag to true
 			isSeatEmpty1 = true;
+			customerOrder1 = 0;
 		}
 
 		// Do the same ting for the second seat..
 		if (customerAnimation2 != null &&!customerAnimation2.isPlaying) {
 			isSeatEmpty2 = true;
+			customerOrder2 = 0;
 		}
 
 		// And the third seat.
 		if (customerAnimation3 != null && !customerAnimation3.isPlaying) {
 			isSeatEmpty3 = true;
+			customerOrder3 = 0;
 		}
 	}
 
@@ -157,18 +160,29 @@ public class GameManager : MonoBehaviour {
 	// ----------------------------------
 
 	private void generateNewCustomerIfNecessary() {
-		if (currentCustomerCount == 0) {
-			customerOrder1 = determineRequestedIndomie (currentCustomerCount);
-		} else if (currentCustomerCount == 1) {
-			customerOrder2 = determineRequestedIndomie (currentCustomerCount);
+		bool shouldShow = false;
+		// For the first two Customers, 100% always show
+		if (currentCustomerCount <= 1) {
+			shouldShow = true;
 		} else {
-			if (isSeatEmpty1) {
-				customerOrder1 = determineRequestedIndomie(currentCustomerCount);
-			} else if (isSeatEmpty2) {
-				customerOrder2 = determineRequestedIndomie(currentCustomerCount);
-			} else if (isSeatEmpty3) {
-				customerOrder3 = determineRequestedIndomie(currentCustomerCount);
-			}
+			// For the rest, give 1/3 chance to show
+			shouldShow = Random.value < 0.333f;
+		}
+
+		// If we decide not to show new Customer, return;
+		if (!shouldShow) {
+			return;
+		}
+
+		if (isSeatEmpty1) {
+			customerOrder1 = determineRequestedIndomie(currentCustomerCount);
+			isSeatEmpty1 = false;
+		} else if (isSeatEmpty2) {
+			customerOrder2 = determineRequestedIndomie(currentCustomerCount);
+			isSeatEmpty2 = false;
+		} else if (isSeatEmpty3) {
+			customerOrder3 = determineRequestedIndomie(currentCustomerCount);
+			isSeatEmpty3 = false;
 		}
 
 		currentCustomerCount++;
