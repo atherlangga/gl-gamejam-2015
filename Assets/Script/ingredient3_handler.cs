@@ -20,6 +20,8 @@ public class ingredient3_handler : MonoBehaviour {
 		//Add a onTOuch effect
 		if (pressed == false) {
 			this.transform.localScale = new Vector3 (240, 240, 1); 
+			//Crack the egg sound
+			this.gameObject.GetComponent<AudioSource>().Play();
 		}
 	}
 

@@ -20,6 +20,8 @@ public class ingredient1_handler : MonoBehaviour {
 		//Add a onTOuch effect
 		if (ok_btn.isGoreng == false & pressed == false) {
 			this.transform.localScale = new Vector3 (240, 240, 1); 
+			//Play the sound
+			this.gameObject.GetComponent<AudioSource>().Play();
 		}
 	}
 
