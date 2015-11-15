@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour {
 	AudioSource mainTheme;
 	AudioSource rushTheme;
 
+	AudioSource happyCustomerSound;
+	AudioSource sadCustomerSound;
 	private List<float> generatedRandomValues = new List<float> ();
 
 	public void Start(){
@@ -59,6 +61,8 @@ public class GameManager : MonoBehaviour {
 		AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
 		mainTheme = allMyAudioSources[0];
 		rushTheme = allMyAudioSources[1];
+		happyCustomerSound = allMyAudioSources [2];
+		sadCustomerSound = allMyAudioSources [3];
 	}
 
 	private void generateRandomNumber() {
@@ -128,8 +132,10 @@ public class GameManager : MonoBehaviour {
 		customerResult1 = result;
 		if (result == customerOrder1) {
 			happyCustomersCount++;
+			happyCustomerSound.Play();
 		} else {
 			sadCustomersCount++;
+			sadCustomerSound.Play();
 		}
 		clearCamera ();
 	
@@ -147,8 +153,10 @@ public class GameManager : MonoBehaviour {
 		customerResult2 = result;
 		if (result == customerOrder2) {
 			happyCustomersCount++;
+			happyCustomerSound.Play();
 		} else {
 			sadCustomersCount++;
+			sadCustomerSound.Play();
 		}
 		clearCamera ();
 
@@ -165,8 +173,10 @@ public class GameManager : MonoBehaviour {
 		customerResult3 = result;
 		if (result == customerOrder3) {
 			happyCustomersCount++;
+			happyCustomerSound.Play();
 		} else {
 			sadCustomersCount++;
+			sadCustomerSound.Play();
 		}
 		clearCamera ();
 
