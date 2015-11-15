@@ -5,12 +5,17 @@ public class ingredient1_handler : MonoBehaviour {
 
 	public GameObject ingredient;
 	public static bool pressed;
+	AudioSource fryingSound;
+	AudioSource BlockSound;
 
-	// Use this for initialization
-	void Start () {
-
-	}
 	
+	void Start () {
+			//Get all the attached sounds, and store them into an Array.
+			AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
+			fryingSound = allMyAudioSources[0];
+			BlockSound = allMyAudioSources[1];
+		}
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -21,8 +26,11 @@ public class ingredient1_handler : MonoBehaviour {
 		if (ok_btn.isGoreng == false & pressed == false) {
 			this.transform.localScale = new Vector3 (240, 240, 1); 
 			//Play the sound
-			this.gameObject.GetComponent<AudioSource>().Play();
+			fryingSound.Play();
+
 		}
+		//If you already pressed, play the blockSound
+		BlockSound.Play ();
 	}
 
 	void OnMouseUp(){
