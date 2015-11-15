@@ -70,8 +70,8 @@ public class Customer : MonoBehaviour {
 			gameManager.customerOrder2 = 0;
 			break;
 		case 3:
-			gameManager.isSeatEmpty2 = true;
-			gameManager.customerOrder2 = 0;
+			gameManager.isSeatEmpty3 = true;
+			gameManager.customerOrder3 = 0;
 			break;
 		default:
 			Debug.LogError("Customer number should only be 1, 2, or 3");
