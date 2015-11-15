@@ -11,8 +11,8 @@ public class dish_handler : MonoBehaviour {
 	public int customerNumber;
 
 	void Start(){
-		InvokeRepeating ("scaleUp", 0.5f, 1.0f);
-		InvokeRepeating ("scaleDown", 1.0f, 1.0f);
+		InvokeRepeating ("scaleUp", 0f, 1.0f);
+		InvokeRepeating ("scaleDown", 0.5f, 1.0f);
 	}
 
 	public void Render() {
