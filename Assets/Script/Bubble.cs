@@ -3,10 +3,14 @@ using System.Collections;
 
 public class Bubble : MonoBehaviour {
 	public GameManager gameManager;
+
+	public GameObject backgroundObject;
+	public GameObject bowlObject;
 	public GameObject rebusObject;
 	public GameObject gorengObject;
 	public GameObject eggObject;
 	public GameObject chiliObject;
+
 	public int customerNumber;
 
 	// Use this for initialization
@@ -16,6 +20,14 @@ public class Bubble : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (!isSeatEmpty (customerNumber)) {
+			backgroundObject.GetComponent<Renderer> ().enabled = true;
+			bowlObject.GetComponent<Renderer> ().enabled = true;
+		} else {
+			backgroundObject.GetComponent<Renderer> ().enabled = false;
+			bowlObject.GetComponent<Renderer> ().enabled = false;
+		}
+
 		if (isGoreng () && !isSeatEmpty(customerNumber)) {
 			//Make associated ingredient visible
 			gorengObject.GetComponent<Renderer> ().enabled = true;
