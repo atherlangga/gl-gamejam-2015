@@ -230,22 +230,17 @@ public class GameManager : MonoBehaviour {
 			isSeatEmpty1 = false;
 			customer1.GetComponent<Renderer> ().enabled = true;
 			currentCustomerCount++;
-			Debug.LogWarning ("customerOrder1: " + customerOrder1);
 		} else if (isSeatEmpty2) {
 			customerOrder2 = determineRequestedIndomie(currentCustomerCount);
 			isSeatEmpty2 = false;
 			customer2.GetComponent<Renderer> ().enabled = true;
 			currentCustomerCount++;
-			Debug.LogWarning ("customerOrder2: " + customerOrder2);
 		} else if (isSeatEmpty3) {
 			customerOrder3 = determineRequestedIndomie(currentCustomerCount);
 			isSeatEmpty3 = false;
 			customer3.GetComponent<Renderer> ().enabled = true;
 			currentCustomerCount++;
-			Debug.LogWarning ("customerOrder3: " + customerOrder3);
 		}
-
-		Debug.LogError ("currentCount: " + currentCustomerCount);
 	}
 
 	private void resetTable1() {
