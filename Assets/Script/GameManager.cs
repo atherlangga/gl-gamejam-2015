@@ -215,9 +215,9 @@ public class GameManager : MonoBehaviour {
 		if (currentCustomerCount <= 1) {
 			shouldShow = true;
 		} else {
-			// For the rest, give 1/2 chance to show
+			// For the rest, give 1/3 chance to show
 			float randomValue = generatedRandomValues[0];
-			shouldShow = true;
+			shouldShow = randomValue < 0.3333f;
 		}
 
 		// If we decide not to show new Customer, return;
@@ -230,22 +230,17 @@ public class GameManager : MonoBehaviour {
 			isSeatEmpty1 = false;
 			customer1.GetComponent<Renderer> ().enabled = true;
 			currentCustomerCount++;
-			Debug.LogWarning ("customerOrder1: " + customerOrder1);
 		} else if (isSeatEmpty2) {
 			customerOrder2 = determineRequestedIndomie(currentCustomerCount);
 			isSeatEmpty2 = false;
 			customer2.GetComponent<Renderer> ().enabled = true;
 			currentCustomerCount++;
-			Debug.LogWarning ("customerOrder2: " + customerOrder2);
 		} else if (isSeatEmpty3) {
 			customerOrder3 = determineRequestedIndomie(currentCustomerCount);
 			isSeatEmpty3 = false;
 			customer3.GetComponent<Renderer> ().enabled = true;
 			currentCustomerCount++;
-			Debug.LogWarning ("customerOrder3: " + customerOrder3);
 		}
-
-		Debug.LogError ("currentCount: " + currentCustomerCount);
 	}
 
 	private void resetTable1() {
