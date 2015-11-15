@@ -40,13 +40,18 @@ public class ok_btn : MonoBehaviour {
 	}
 
 	void determineCustomerOrder(){
-		switch (gameManager.currentPopUp) {
-		case 1: gameManager.ServeCustomerResult1 (currentOrder);
-			break;
-		case 2: gameManager.ServeCustomerResult2 (currentOrder);
-			break;
-		case 3: gameManager.ServeCustomerResult3 (currentOrder);
-			break;
+		if (currentOrder != 0) {
+			switch (gameManager.currentPopUp) {
+			case 1:
+				gameManager.ServeCustomerResult1 (currentOrder);
+				break;
+			case 2:
+				gameManager.ServeCustomerResult2 (currentOrder);
+				break;
+			case 3:
+				gameManager.ServeCustomerResult3 (currentOrder);
+				break;
+			}
 		}
 	}
 

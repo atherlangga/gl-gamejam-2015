@@ -5,6 +5,10 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour {
 	public Camera mainCamera;
 
+	public GameObject dish1;
+	public GameObject dish2;
+	public GameObject dish3;
+
 	public int currentCustomerCount = 0;
 	public int happyCustomersCount = 0;
 	public int sadCustomersCount = 0;
@@ -137,6 +141,9 @@ public class GameManager : MonoBehaviour {
 			sadCustomersCount++;
 		}
 		clearCamera ();
+	
+		//Make the dishBusy for a while
+		dish1.GetComponent<DishClick> ().makeDishBusy (1);
 
 		customerResult1 = result;
 		// TODO: play animation.
@@ -151,6 +158,9 @@ public class GameManager : MonoBehaviour {
 		}
 		clearCamera ();
 
+		//Make the dishBusy for a while
+		dish2.GetComponent<DishClick> ().makeDishBusy (2);
+
 		customerResult2 = result;
 	}
 
@@ -162,6 +172,9 @@ public class GameManager : MonoBehaviour {
 			sadCustomersCount++;
 		}
 		clearCamera ();
+
+		//Make the dishBusy for a while
+		dish3.GetComponent<DishClick> ().makeDishBusy (3);
 
 		customerResult3 = result;
 	}
