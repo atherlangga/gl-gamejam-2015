@@ -15,8 +15,6 @@ public class ok_btn : MonoBehaviour {
 	public GameObject ingredient3;
 	public GameObject ingredient4;
 
-	public GameObject customerHand;
-	
 	// Use this for initialization
 	void Start () {
 	
@@ -31,14 +29,23 @@ public class ok_btn : MonoBehaviour {
 		//Come back to normal size
 		this.transform.localScale = new Vector3 (70, 70, 1); 
 
+		if (isGoreng || isRebus) {
+			determineCustomerOrder ();
+			resetPopUp ();
+		} else if (!isGoreng && !isRebus) {
+			this.GetComponent<AudioSource>().Play();
+		}
 
-		determineCustomerOrder ();
-		resetPopUp ();
 	}
 
 	void OnMouseDown(){
-		//Make touchEffect
-		this.transform.localScale = new Vector3 (100, 100, 1); 
+		if (!isGoreng && !isRebus) {
+			this.transform.localScale = new Vector3 (80, 80, 1);
+		} else if (isGoreng || isRebus) {
+			//Make touchEffect
+			this.transform.localScale = new Vector3 (100, 100, 1); 
+		}
+
 	}
 
 	void determineCustomerOrder(){
@@ -46,8 +53,6 @@ public class ok_btn : MonoBehaviour {
 			switch (gameManager.currentPopUp) {
 			case 1:
 				gameManager.ServeCustomerResult1 (currentOrder);
-				customerHand.GetComponent<Animator>().SetBool("HandActive",true);
-				Invoke("stopHandAnimation",5);
 				break;
 			case 2:
 				gameManager.ServeCustomerResult2 (currentOrder);
@@ -58,12 +63,7 @@ public class ok_btn : MonoBehaviour {
 			}
 		}
 	}
-
-	void stopHandAnimation(){
-		customerHand.GetComponent<Animator>().SetBool("HandActive",false);
-	}
-
-
+	
 	void resetPopUp(){
 		ok_btn.currentOrder = 0;
 		ok_btn.isRebus = false;
