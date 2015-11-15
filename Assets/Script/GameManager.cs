@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour {
 	public GameObject dish2;
 	public GameObject dish3;
 
+	public GameObject hand1;
+	public GameObject hand2;
+	public GameObject hand3;
+
+
 	public GameObject dishContent1;
 	public GameObject dishContent2;
 	public GameObject dishContent3;
@@ -76,6 +81,12 @@ public class GameManager : MonoBehaviour {
 		secondsLeft--;
 		generateRandomNumber ();
 		generateNewCustomerIfNecessary();
+
+		//Trigger the game over!
+		if (secondsLeft == 0) {
+			EndGame();
+		}
+
 	}
 
 	public void StartGame() {
@@ -87,6 +98,11 @@ public class GameManager : MonoBehaviour {
 		Invoke ("stopMainTheme", 74);
 		Invoke ("playRushTheme", 75);
 	}
+
+	public void EndGame(){
+		print ("game over");
+	}
+
 
 	public void MakeCustomerOrder1() {
 		displayPopUp ();
@@ -119,6 +135,7 @@ public class GameManager : MonoBehaviour {
 		// Make sure the table is ready
 		dish1.GetComponent<DishClick> ().makeDishBusy (1);
 		dishContent1.GetComponent<dish_handler> ().Render ();
+		hand1.GetComponent<Animator> ().SetBool ("HandActive", true);
 
 		// Make sure the table is cleaned afterwards
 		Invoke ("resetTable1", 5.0f);
@@ -137,7 +154,7 @@ public class GameManager : MonoBehaviour {
 		// Make sure the table is ready
 		dish2.GetComponent<DishClick> ().makeDishBusy (2);
 		dishContent2.GetComponent<dish_handler> ().Render ();
-
+		hand2.GetComponent<Animator> ().SetBool ("HandActive", true);
 		// Make sure the table is cleaned afterwards
 		Invoke ("resetTable2", 5.0f);
 	}
@@ -155,6 +172,7 @@ public class GameManager : MonoBehaviour {
 		// Make sure the table is ready
 		dish3.GetComponent<DishClick> ().makeDishBusy (2);
 		dishContent3.GetComponent<dish_handler> ().Render ();
+		hand3.GetComponent<Animator> ().SetBool ("HandActive", true);
 		
 		// Make sure the table is cleaned afterwards
 		Invoke ("resetTable3", 5.0f);
@@ -235,6 +253,7 @@ public class GameManager : MonoBehaviour {
 		customerResult1 = 999;
 		customer1.GetComponent<Renderer> ().enabled = false;
 		dishContent1.GetComponent<dish_handler> ().Render ();
+		hand1.GetComponent<Animator> ().SetBool ("HandActive", false);
 		isSeatEmpty1 = true;
 	}
 
@@ -243,6 +262,7 @@ public class GameManager : MonoBehaviour {
 		customerResult2 = 999;
 		customer2.GetComponent<Renderer> ().enabled = false;
 		dishContent2.GetComponent<dish_handler> ().Render ();
+		hand2.GetComponent<Animator> ().SetBool ("HandActive", false);
 		isSeatEmpty2 = true;
 	}
 
@@ -251,6 +271,7 @@ public class GameManager : MonoBehaviour {
 		customerResult3 = 999;
 		customer3.GetComponent<Renderer> ().enabled = false;
 		dishContent3.GetComponent<dish_handler> ().Render ();
+		hand3.GetComponent<Animator> ().SetBool ("HandActive", false);
 		isSeatEmpty3 = true;
 	}
 
