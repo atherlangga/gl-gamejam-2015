@@ -31,13 +31,10 @@ public class GameManager : MonoBehaviour {
 	public Animation customerAnimation2;
 	public Animation customerAnimation3;
 
-	private System.Timers.Timer gameTimer;
-
 	public bool isSeatEmpty1 = true;
 	public bool isSeatEmpty2 = true;
 	public bool isSeatEmpty3 = true;
-
-
+	
 	//Audio variable
 	AudioSource mainTheme;
 	AudioSource rushTheme;
@@ -49,8 +46,6 @@ public class GameManager : MonoBehaviour {
 		AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
 		mainTheme = allMyAudioSources[0];
 		rushTheme = allMyAudioSources[1];
-
-		InvokeRepeating ("generateRandomNumber", 1.0f, 1.0f);
 	}
 
 	private void generateRandomNumber() {
@@ -69,28 +64,20 @@ public class GameManager : MonoBehaviour {
 		rushTheme.Play ();
 	}
 
+	private void tick() {
+		secondsLeft--;
+		generateRandomNumber ();
+		generateNewCustomerIfNecessary();
+	}
 
 	public void StartGame() {
-		// Create a timer and make it tick every second
-		gameTimer = new System.Timers.Timer (1000);
-
-		gameTimer.Elapsed += (object sender, System.Timers.ElapsedEventArgs e) => {
-			// Reduce `secondsLeft` every second
-			secondsLeft--;
-
-			// Generate new Customer if necessary
-			generateNewCustomerIfNecessary();
-
-		};
-
-		gameTimer.Start ();
+		// Register a function to be called every second
+		InvokeRepeating ("tick", 1.0f, 1.0f);
 
 		//Play MainTheme
 		mainTheme.Play ();
 		Invoke ("stopMainTheme", 74);
 		Invoke ("playRushTheme", 75);
-
-
 	}
 
 	public void MakeCustomerOrder1() {
