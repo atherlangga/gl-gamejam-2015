@@ -254,7 +254,7 @@ public class GameManager : MonoBehaviour {
 		} else if (secondsLeft <= 81) {
 			// For the rest, give 1/3 chance to show
 			float randomValue = generatedRandomValues[0];
-			shouldShow = randomValue < 0.3333f;
+			shouldShow = randomValue < 0.5f;
 		}
 
 		// If we decide not to show new Customer, return;
