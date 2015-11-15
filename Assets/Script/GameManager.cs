@@ -321,8 +321,17 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	private int determineStars(int happyCustomersCount, int sadCustomersCount) {
-		// TODO
-		return 0;
+		if (happyCustomersCount >= 20) {
+			return 5;
+		} else if (happyCustomersCount >= 10) {
+			return 4;
+		} else if (happyCustomersCount >= 5) {
+			return 3;
+		} else if (happyCustomersCount >= 2) {
+			return 2;
+		} else {
+			return 1;
+		}
 	}
 
 }
