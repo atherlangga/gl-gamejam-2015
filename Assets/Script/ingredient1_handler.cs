@@ -29,9 +29,11 @@ public class ingredient1_handler : MonoBehaviour {
 			fryingSound.Play();
 
 		}
-		if (pressed) {
+		if (pressed || ok_btn.isGoreng) {
 			//If you already pressed, play the blockSound
 			BlockSound.Play ();
+			//Scale it smaller
+			this.transform.localScale = new Vector3 (220, 215, 1); 
 		}
 
 	}
