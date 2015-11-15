@@ -35,7 +35,8 @@ public class DishClick : MonoBehaviour {
 	void makeDish3Empty(){
 		dish3Busy = false;
 	}
-	
+
+
 	void OnMouseUp(){
 		switch (customerNumber) {
 		case 1:
