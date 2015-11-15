@@ -44,28 +44,6 @@ public class GameManager : MonoBehaviour {
 
 	private List<float> generatedRandomValues = new List<float> ();
 
-	void Update() {
-
-		// Determine whether the first seat is empty.
-		if (customerAnimation1 != null && !customerAnimation1.isPlaying) {
-			// If it is, we put the seat empty flag to true
-			isSeatEmpty1 = true;
-			customerOrder1 = 0;
-		}
-
-		// Do the same ting for the second seat..
-		if (customerAnimation2 != null &&!customerAnimation2.isPlaying) {
-			isSeatEmpty2 = true;
-			customerOrder2 = 0;
-		}
-
-		// And the third seat.
-		if (customerAnimation3 != null && !customerAnimation3.isPlaying) {
-			isSeatEmpty3 = true;
-			customerOrder3 = 0;
-		}
-	}
-
 	public void Start(){
 		//Get all the attached sounds, and store them into an Array.
 		AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
