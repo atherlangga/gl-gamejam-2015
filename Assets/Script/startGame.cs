@@ -15,7 +15,6 @@ public class startGame : MonoBehaviour {
 	}
 
 	void OnMouseUp(){
-
 		//Start the game on click
 		gameManager.StartGame ();
 
