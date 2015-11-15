@@ -98,6 +98,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void StartGame() {
+		//Center the camera on the Game.
+		clearCamera ();
+
 		// Register a function to be called every second
 		InvokeRepeating ("tick", 1.0f, 1.0f);
 
@@ -337,7 +340,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	
-	private int determineStars(int happyCustomersCount, int sadCustomersCount) {
+	public int determineStars() {
 		if (happyCustomersCount >= 20) {
 			return 5;
 		} else if (happyCustomersCount >= 10) {
