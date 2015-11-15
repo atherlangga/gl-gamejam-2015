@@ -11,9 +11,8 @@ public class dish_handler : MonoBehaviour {
 	public int customerNumber;
 
 	void Start(){
-	
-			InvokeRepeating ("scaleUp", 1,1);
-			InvokeRepeating ("scaleDown", 1.5f,1);
+		InvokeRepeating ("scaleUp", 0.5f, 1.0f);
+		InvokeRepeating ("scaleDown", 1.0f, 1.0f);
 	}
 
 	public void Render() {
@@ -70,11 +69,11 @@ public class dish_handler : MonoBehaviour {
 
 	void scaleUp(){
 		switch (customerNumber) {
-		case 1: if(gameManager.customerOrder1 != 0 && gameManager.customerResult1 == 999){ this.transform.localScale = new Vector3 (100, 100, 1);}
+		case 1: if(gameManager.customerOrder1 != 0 && (gameManager.customerResult1 == 999 || gameManager.customerResult1 == 0)) { this.transform.localScale = new Vector3 (100, 100, 1); }
 			break;
-		case 2: if(gameManager.customerOrder2 != 0 && gameManager.customerResult1 == 999){ this.transform.localScale = new Vector3 (100, 100, 1); }
+		case 2: if(gameManager.customerOrder2 != 0 && (gameManager.customerResult2 == 999 || gameManager.customerResult2 == 0)) { this.transform.localScale = new Vector3 (100, 100, 1); }
 			break;
-		case 3: if(gameManager.customerOrder3 != 0 && gameManager.customerResult1 == 999){ this.transform.localScale = new Vector3 (100, 100, 1); }
+		case 3: if(gameManager.customerOrder3 != 0 && (gameManager.customerResult3 == 999 || gameManager.customerResult3 == 0)) { this.transform.localScale = new Vector3 (100, 100, 1); }
 			break;
 		}
 
