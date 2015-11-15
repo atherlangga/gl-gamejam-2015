@@ -80,6 +80,9 @@ public class GameManager : MonoBehaviour {
 	private void playRushTheme(){
 		rushTheme.Play ();
 	}
+	private void stopRushTheme() {
+		rushTheme.Play ();
+	}
 
 	private void tick() {
 		generateRandomNumber ();
@@ -102,14 +105,28 @@ public class GameManager : MonoBehaviour {
 		mainTheme.Play ();
 		Invoke ("stopMainTheme", 74);
 		Invoke ("playRushTheme", 75);
+		Invoke ("stopRushTheme", 89);
 	}
 
 	public void EndGame(){
 		print ("game over");
 
+		CancelInvoke ();
+
 		Vector3 newPosition = mainCamera.transform.position;
 		newPosition.x = -2370f;
 		mainCamera.transform.position = newPosition;
+	}
+
+	public void ResetGame() {
+		secondsLeft = 90;
+		currentCustomerCount = 0;
+		happyCustomersCount = 0;
+		sadCustomersCount = 0;
+
+		resetTable1 ();
+		resetTable2 ();
+		resetTable3 ();
 	}
 
 
