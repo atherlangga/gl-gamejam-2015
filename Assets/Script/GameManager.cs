@@ -106,6 +106,10 @@ public class GameManager : MonoBehaviour {
 
 	public void EndGame(){
 		print ("game over");
+
+		Vector3 newPosition = mainCamera.transform.position;
+		newPosition.x = -2370f;
+		mainCamera.transform.position = newPosition;
 	}
 
 
