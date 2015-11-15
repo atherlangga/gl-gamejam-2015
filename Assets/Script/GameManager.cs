@@ -33,9 +33,15 @@ public class GameManager : MonoBehaviour {
 	public bool isSeatEmpty2 = true;
 	public bool isSeatEmpty3 = true;
 
+
+	//Audio variable
+	AudioSource mainTheme;
+	AudioSource rushTheme;
+
 	private List<float> generatedRandomValues = new List<float> ();
 
 	void Update() {
+
 		// Determine whether the first seat is empty.
 		if (customerAnimation1 != null && !customerAnimation1.isPlaying) {
 			// If it is, we put the seat empty flag to true
@@ -57,7 +63,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Start(){
-		StartGame ();
+		//Get all the attached sounds, and store them into an Array.
+		AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
+		mainTheme = allMyAudioSources[0];
+		rushTheme = allMyAudioSources[1];
+
 		InvokeRepeating ("generateRandomNumber", 1.0f, 1.0f);
 	}
 
@@ -69,6 +79,15 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	//Audio supporting functions
+	private void stopMainTheme(){
+		mainTheme.Stop ();
+	}
+	private void playRushTheme(){
+		rushTheme.Play ();
+	}
+
+
 	public void StartGame() {
 		// Create a timer and make it tick every second
 		gameTimer = new System.Timers.Timer (1000);
@@ -79,9 +98,17 @@ public class GameManager : MonoBehaviour {
 
 			// Generate new Customer if necessary
 			generateNewCustomerIfNecessary();
+
 		};
 
 		gameTimer.Start ();
+
+		//Play MainTheme
+		mainTheme.Play ();
+		Invoke ("stopMainTheme", 74);
+		Invoke ("playRushTheme", 75);
+
+
 	}
 
 	public void MakeCustomerOrder1() {

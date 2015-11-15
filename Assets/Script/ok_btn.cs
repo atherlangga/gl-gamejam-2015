@@ -26,8 +26,17 @@ public class ok_btn : MonoBehaviour {
 	}
 
 	void OnMouseUp(){
+		//Come back to normal size
+		this.transform.localScale = new Vector3 (70, 70, 1); 
+
+
 		determineCustomerOrder ();
 		resetPopUp ();
+	}
+
+	void OnMouseDown(){
+		//Make touchEffect
+		this.transform.localScale = new Vector3 (100, 100, 1); 
 	}
 
 	void determineCustomerOrder(){
