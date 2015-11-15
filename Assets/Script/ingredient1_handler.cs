@@ -29,8 +29,11 @@ public class ingredient1_handler : MonoBehaviour {
 			fryingSound.Play();
 
 		}
-		//If you already pressed, play the blockSound
-		BlockSound.Play ();
+		if (pressed) {
+			//If you already pressed, play the blockSound
+			BlockSound.Play ();
+		}
+
 	}
 
 	void OnMouseUp(){
