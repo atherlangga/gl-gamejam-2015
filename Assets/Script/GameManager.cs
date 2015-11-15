@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour {
 	public GameObject dish2;
 	public GameObject dish3;
 
+	public GameObject dishContent1;
+	public GameObject dishContent2;
+	public GameObject dishContent3;
+
 	public int currentCustomerCount = 0;
 	public int happyCustomersCount = 0;
 	public int sadCustomersCount = 0;
@@ -34,6 +38,10 @@ public class GameManager : MonoBehaviour {
 	public bool isSeatEmpty1 = true;
 	public bool isSeatEmpty2 = true;
 	public bool isSeatEmpty3 = true;
+
+	public GameObject customer1;
+	public GameObject customer2;
+	public GameObject customer3;
 	
 	//Audio variable
 	AudioSource mainTheme;
@@ -100,6 +108,7 @@ public class GameManager : MonoBehaviour {
 
 	// To be called from the pop-up
 	public void ServeCustomerResult1(int result) {
+		customerResult1 = result;
 		if (result == customerOrder1) {
 			happyCustomersCount++;
 		} else {
@@ -107,15 +116,17 @@ public class GameManager : MonoBehaviour {
 		}
 		clearCamera ();
 	
-		//Make the dishBusy for a while
+		// Make sure the table is ready
 		dish1.GetComponent<DishClick> ().makeDishBusy (1);
+		dishContent1.GetComponent<dish_handler> ().Render ();
 
-		customerResult1 = result;
-		// TODO: play animation.
+		// Make sure the table is cleaned afterwards
+		Invoke ("resetTable1", 5.0f);
 	}
 
 	// To be called from the pop-up
 	public void ServeCustomerResult2(int result) {
+		customerResult2 = result;
 		if (result == customerOrder2) {
 			happyCustomersCount++;
 		} else {
@@ -123,14 +134,17 @@ public class GameManager : MonoBehaviour {
 		}
 		clearCamera ();
 
-		//Make the dishBusy for a while
+		// Make sure the table is ready
 		dish2.GetComponent<DishClick> ().makeDishBusy (2);
+		dishContent2.GetComponent<dish_handler> ().Render ();
 
-		customerResult2 = result;
+		// Make sure the table is cleaned afterwards
+		Invoke ("resetTable2", 5.0f);
 	}
 
 	// To be called from the pop-up
 	public void ServeCustomerResult3(int result) {
+		customerResult3 = result;
 		if (result == customerOrder3) {
 			happyCustomersCount++;
 		} else {
@@ -138,10 +152,12 @@ public class GameManager : MonoBehaviour {
 		}
 		clearCamera ();
 
-		//Make the dishBusy for a while
-		dish3.GetComponent<DishClick> ().makeDishBusy (3);
-
-		customerResult3 = result;
+		// Make sure the table is ready
+		dish3.GetComponent<DishClick> ().makeDishBusy (2);
+		dishContent3.GetComponent<dish_handler> ().Render ();
+		
+		// Make sure the table is cleaned afterwards
+		Invoke ("resetTable3", 5.0f);
 	}
 
 
@@ -181,9 +197,9 @@ public class GameManager : MonoBehaviour {
 		if (currentCustomerCount <= 1) {
 			shouldShow = true;
 		} else {
-			// For the rest, give 1/3 chance to show
+			// For the rest, give 1/2 chance to show
 			float randomValue = generatedRandomValues[0];
-			shouldShow = randomValue < 0.333f;
+			shouldShow = true;
 		}
 
 		// If we decide not to show new Customer, return;
@@ -194,18 +210,48 @@ public class GameManager : MonoBehaviour {
 		if (isSeatEmpty1) {
 			customerOrder1 = determineRequestedIndomie(currentCustomerCount);
 			isSeatEmpty1 = false;
-			Debug.Log ("customerOrder1: " + customerOrder1);
+			customer1.GetComponent<Renderer> ().enabled = true;
+			currentCustomerCount++;
+			Debug.LogWarning ("customerOrder1: " + customerOrder1);
 		} else if (isSeatEmpty2) {
 			customerOrder2 = determineRequestedIndomie(currentCustomerCount);
 			isSeatEmpty2 = false;
-			Debug.Log ("customerOrder2: " + customerOrder2);
+			customer2.GetComponent<Renderer> ().enabled = true;
+			currentCustomerCount++;
+			Debug.LogWarning ("customerOrder2: " + customerOrder2);
 		} else if (isSeatEmpty3) {
 			customerOrder3 = determineRequestedIndomie(currentCustomerCount);
 			isSeatEmpty3 = false;
-			Debug.Log ("customerOrder3: " + customerOrder3);
+			customer3.GetComponent<Renderer> ().enabled = true;
+			currentCustomerCount++;
+			Debug.LogWarning ("customerOrder3: " + customerOrder3);
 		}
 
-		currentCustomerCount++;
+		Debug.LogError ("currentCount: " + currentCustomerCount);
+	}
+
+	private void resetTable1() {
+		customerOrder1 = 0;
+		customerResult1 = 999;
+		customer1.GetComponent<Renderer> ().enabled = false;
+		dishContent1.GetComponent<dish_handler> ().Render ();
+		isSeatEmpty1 = true;
+	}
+
+	private void resetTable2() {
+		customerOrder2 = 0;
+		customerResult2 = 999;
+		customer2.GetComponent<Renderer> ().enabled = false;
+		dishContent2.GetComponent<dish_handler> ().Render ();
+		isSeatEmpty2 = true;
+	}
+
+	private void resetTable3() {
+		customerOrder3 = 0;
+		customerResult3 = 999;
+		customer3.GetComponent<Renderer> ().enabled = false;
+		dishContent3.GetComponent<dish_handler> ().Render ();
+		isSeatEmpty3 = true;
 	}
 
 	private int determineRequestedIndomie(int orderNumber) {

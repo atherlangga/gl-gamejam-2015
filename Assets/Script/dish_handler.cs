@@ -9,18 +9,11 @@ public class dish_handler : MonoBehaviour {
 	public GameObject HasEggObject;
 	public GameObject HasChiliObject;
 	public int customerNumber;
-	
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	public void Render() {
 		if (isGoreng ()) {
 			//Make associated ingredient visible
 			isGorengObject.GetComponent<Renderer> ().enabled = true;
-			StartCoroutine("clearFood");
 		} else {
 			isGorengObject.GetComponent<Renderer> ().enabled = false;
 		}
@@ -28,7 +21,7 @@ public class dish_handler : MonoBehaviour {
 		if (isRebus ()) {
 			//Make associated ingredient visible
 			isRebusObject.GetComponent<Renderer> ().enabled = true;
-			StartCoroutine("clearFood");
+			//StartCoroutine("clearFood");
 		}else {
 			isRebusObject.GetComponent<Renderer> ().enabled = false;
 		}
@@ -45,29 +38,6 @@ public class dish_handler : MonoBehaviour {
 		}
 		else {
 			HasChiliObject.GetComponent<Renderer> ().enabled = false;
-		}
-	}
-	
-	//Clear the food after a specified time has passed
-	IEnumerator clearFood()
-	{
-		yield return new WaitForSeconds(5);
-
-		Debug.Log ("Will clear dish " + customerNumber);
-
-		switch (customerNumber) {
-		case 1:
-			gameManager.customerResult1 = 999;
-			break;
-		case 2:
-			gameManager.customerResult2 = 999;
-			break;
-		case 3:
-			gameManager.customerResult3 = 999;
-			break;
-		default:
-			Debug.LogError("Customer number should only be 1, 2, or 3");
-			break;
 		}
 	}
 
