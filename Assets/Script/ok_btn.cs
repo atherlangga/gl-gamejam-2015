@@ -14,6 +14,8 @@ public class ok_btn : MonoBehaviour {
 	public GameObject ingredient2;
 	public GameObject ingredient3;
 	public GameObject ingredient4;
+
+	public GameObject customerHand;
 	
 	// Use this for initialization
 	void Start () {
@@ -44,6 +46,8 @@ public class ok_btn : MonoBehaviour {
 			switch (gameManager.currentPopUp) {
 			case 1:
 				gameManager.ServeCustomerResult1 (currentOrder);
+				customerHand.GetComponent<Animator>().SetBool("HandActive",true);
+				Invoke("stopHandAnimation",5);
 				break;
 			case 2:
 				gameManager.ServeCustomerResult2 (currentOrder);
@@ -53,6 +57,10 @@ public class ok_btn : MonoBehaviour {
 				break;
 			}
 		}
+	}
+
+	void stopHandAnimation(){
+		customerHand.GetComponent<Animator>().SetBool("HandActive",false);
 	}
 
 
