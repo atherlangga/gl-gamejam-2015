@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour {
 		rushTheme.Play ();
 	}
 	private void stopRushTheme() {
-		rushTheme.Play ();
+		rushTheme.Stop ();
 	}
 
 	private void tick() {
