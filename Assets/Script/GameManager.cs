@@ -215,9 +215,9 @@ public class GameManager : MonoBehaviour {
 		if (currentCustomerCount <= 1) {
 			shouldShow = true;
 		} else {
-			// For the rest, give 1/2 chance to show
+			// For the rest, give 1/3 chance to show
 			float randomValue = generatedRandomValues[0];
-			shouldShow = true;
+			shouldShow = randomValue < 0.3333f;
 		}
 
 		// If we decide not to show new Customer, return;
