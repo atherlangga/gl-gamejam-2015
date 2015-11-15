@@ -78,9 +78,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void tick() {
-		secondsLeft--;
 		generateRandomNumber ();
 		generateNewCustomerIfNecessary();
+
+		secondsLeft--;
 
 		//Trigger the game over!
 		if (secondsLeft == 0) {
@@ -211,10 +212,12 @@ public class GameManager : MonoBehaviour {
 
 	private void generateNewCustomerIfNecessary() {
 		bool shouldShow = false;
-		// For the first two Customers, 100% always show
-		if (currentCustomerCount <= 1) {
+
+		// For the first Customer, give the player 5 seconds, and
+		// give 4 seconds for the second Customer.
+		if (secondsLeft == 90 || secondsLeft == 85) {
 			shouldShow = true;
-		} else {
+		} else if (secondsLeft <= 81) {
 			// For the rest, give 1/3 chance to show
 			float randomValue = generatedRandomValues[0];
 			shouldShow = randomValue < 0.3333f;
