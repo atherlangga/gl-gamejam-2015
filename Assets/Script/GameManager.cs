@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 	public Camera mainCamera;
@@ -28,11 +29,19 @@ public class GameManager : MonoBehaviour {
 
 	private System.Timers.Timer gameTimer;
 
-	private bool isSeatEmpty1 = true;
-	private bool isSeatEmpty2 = true;
-	private bool isSeatEmpty3 = true;
+	public bool isSeatEmpty1 = true;
+	public bool isSeatEmpty2 = true;
+	public bool isSeatEmpty3 = true;
+
+
+	//Audio variable
+	AudioSource mainTheme;
+	AudioSource rushTheme;
+
+	private List<float> generatedRandomValues = new List<float> ();
 
 	void Update() {
+
 		// Determine whether the first seat is empty.
 		if (customerAnimation1 != null && !customerAnimation1.isPlaying) {
 			// If it is, we put the seat empty flag to true
@@ -54,9 +63,30 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Start(){
-	
-		StartGame ();
+		//Get all the attached sounds, and store them into an Array.
+		AudioSource[] allMyAudioSources = GetComponents<AudioSource>();
+		mainTheme = allMyAudioSources[0];
+		rushTheme = allMyAudioSources[1];
+
+		InvokeRepeating ("generateRandomNumber", 1.0f, 1.0f);
 	}
+
+	private void generateRandomNumber() {
+		generatedRandomValues.Clear ();
+
+		for (int i = 0; i < 10; i++) {
+			generatedRandomValues.Add(Random.value);
+		}
+	}
+
+	//Audio supporting functions
+	private void stopMainTheme(){
+		mainTheme.Stop ();
+	}
+	private void playRushTheme(){
+		rushTheme.Play ();
+	}
+
 
 	public void StartGame() {
 		// Create a timer and make it tick every second
@@ -68,9 +98,17 @@ public class GameManager : MonoBehaviour {
 
 			// Generate new Customer if necessary
 			generateNewCustomerIfNecessary();
+
 		};
 
 		gameTimer.Start ();
+
+		//Play MainTheme
+		mainTheme.Play ();
+		Invoke ("stopMainTheme", 74);
+		Invoke ("playRushTheme", 75);
+
+
 	}
 
 	public void MakeCustomerOrder1() {
@@ -166,7 +204,8 @@ public class GameManager : MonoBehaviour {
 			shouldShow = true;
 		} else {
 			// For the rest, give 1/3 chance to show
-			shouldShow = Random.value < 0.333f;
+			float randomValue = generatedRandomValues[0];
+			shouldShow = randomValue < 0.333f;
 		}
 
 		// If we decide not to show new Customer, return;
@@ -177,12 +216,15 @@ public class GameManager : MonoBehaviour {
 		if (isSeatEmpty1) {
 			customerOrder1 = determineRequestedIndomie(currentCustomerCount);
 			isSeatEmpty1 = false;
+			Debug.Log ("customerOrder1: " + customerOrder1);
 		} else if (isSeatEmpty2) {
 			customerOrder2 = determineRequestedIndomie(currentCustomerCount);
 			isSeatEmpty2 = false;
+			Debug.Log ("customerOrder2: " + customerOrder2);
 		} else if (isSeatEmpty3) {
 			customerOrder3 = determineRequestedIndomie(currentCustomerCount);
 			isSeatEmpty3 = false;
+			Debug.Log ("customerOrder3: " + customerOrder3);
 		}
 
 		currentCustomerCount++;
@@ -198,17 +240,21 @@ public class GameManager : MonoBehaviour {
 			int result = 0;
 			
 			// For mie type
-			int mieType = (int) Random.value * 100;
-			result += mieType;
+			bool wantsGoreng = generatedRandomValues[1] > 0.5;
+			if (wantsGoreng) {
+				result += 100;
+			} else {
+				result += 200;
+			}
 			
 			// Customer wants egg?
-			bool wantsEgg = Random.value > 0.5;
+			bool wantsEgg = generatedRandomValues[2] > 0.5;
 			if (wantsEgg) {
 				result += 30;
 			}
 			
 			// Customer wants vegetables?
-			bool wantsVegetables = Random.value > 0.5;
+			bool wantsVegetables = generatedRandomValues[3] > 0.5;
 			if (wantsVegetables) {
 				result += 4;
 			}

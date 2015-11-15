@@ -13,7 +13,11 @@ public class dish1_handler : MonoBehaviour {
 	void Start () {
 	
 	}
-	
+
+	void OnMouseDown(){
+		gameManager.displayPopUp ();
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (isGoreng ()) {
@@ -47,7 +51,7 @@ public class dish1_handler : MonoBehaviour {
 		}
 	}
 
-	//Clear the food after 3 seconds has passed
+	//Clear the food after a specified time has passed
 	IEnumerator clearFood()
 	{
 		yield return new WaitForSeconds(5);
